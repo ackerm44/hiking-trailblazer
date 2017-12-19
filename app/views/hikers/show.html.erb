@@ -1,1 +1,14 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h2><%= @hiker.username %>'s Hiking Profile</h2>
+
+<h4>Trails Hiked</h4>
+<br>
+<% @hiker.trails.each do |trail| %>
+  <ul>
+    <li><%= trail.name %></li>
+  </ul>
+<% end %>
+
+<!--Show a list of the trails the hiker has completed-->
+<!--Show a count of all the trails completed-->
+
+<!--Wish List: Have a user be able to add a list of hikes they would like to go on-->

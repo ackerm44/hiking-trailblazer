@@ -17,12 +17,14 @@ class HikersController < ApplicationController
       redirect "/hikers/new"
     else
       @hiker.save
+      session[:id] = @hiker.id
       redirect "/hikers"
     end
   end
 
-  # GET: /hikers/5
-  get "/hikers/:id" do
+  # GET: /hikers/username
+  get "/hikers/:slug" do
+    @hiker = Hiker.find_by_slug(params[:slug])
     erb :"/hikers/show.html"
   end
 
