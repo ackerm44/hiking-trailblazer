@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       session[:id] = @hiker.id
       redirect '/trails'
     else
-      redirect '/login'
+      redirect "/hikers/#{@hiker.slug}"
     end
   end
   

@@ -2,13 +2,21 @@ class HikersController < ApplicationController
 
   # GET: /hikers
   get "/hikers" do
-    @hikers = Hiker.all
-    erb :"/hikers/index.html"
+    if Helpers.logged_in?(session)
+      @hikers = Hiker.all
+      erb :"/hikers/index.html"
+    else
+      redirect "/"
+    end
   end
 
   # GET: /hikers/new
   get "/hikers/new" do
-    erb :"/hikers/new.html"
+    if Helpers.logged_in?(session)
+      erb :"/hikers/new.html"
+    else
+      redirect "/"
+    end
   end
 
   # POST: /hikers
@@ -25,22 +33,26 @@ class HikersController < ApplicationController
 
   # GET: /hikers/username
   get "/hikers/:slug" do
-    @hiker = Hiker.find_by_slug(params[:slug])
-    erb :"/hikers/show.html"
+    if Helpers.logged_in?(session)
+      @hiker = Hiker.find_by_slug(params[:slug])
+      erb :"/hikers/show.html"
+    else
+      redirect "/"
+    end
   end
 
-  # GET: /hikers/5/edit
-  get "/hikers/:id/edit" do
-    erb :"/hikers/edit.html"
-  end
+  # # GET: /hikers/5/edit
+  # get "/hikers/:id/edit" do
+  #   erb :"/hikers/edit.html"
+  # end
 
-  # PATCH: /hikers/5
-  patch "/hikers/:id" do
-    redirect "/hikers/:id"
-  end
+  # # PATCH: /hikers/5
+  # patch "/hikers/:id" do
+  #   redirect "/hikers/:id"
+  # end
 
-  # DELETE: /hikers/5/delete
-  delete "/hikers/:id/delete" do
-    redirect "/hikers"
-  end
+  # # DELETE: /hikers/5/delete
+  # delete "/hikers/:id/delete" do
+  #   redirect "/hikers"
+  # end
 end
