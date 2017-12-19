@@ -2,6 +2,7 @@ class HikersController < ApplicationController
 
   # GET: /hikers
   get "/hikers" do
+    @hikers = Hiker.all
     erb :"/hikers/index.html"
   end
 

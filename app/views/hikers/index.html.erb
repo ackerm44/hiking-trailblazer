@@ -1,1 +1,5 @@
-<h1>This is the Model's index page.</h1>
+<h2>All Hikers on Hiking Trailblazer</h2>
+
+<% @hikers.each do |hiker| %>
+  <a href="/hikers/<%= hiker.slug %>"><%= hiker.username %></a>
+<% end %>
