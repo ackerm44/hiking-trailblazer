@@ -2,16 +2,32 @@ class TrailsController < ApplicationController
 
   # GET: /trails
   get "/trails" do
-    erb :"/trails/index.html"
+    if Helpers.logged_in?(session)
+      @trails = Trail.all
+      erb :"/trails/index.html"
+    else
+      redirect "/"
+    end
   end
 
   # GET: /trails/new
   get "/trails/new" do
-    erb :"/trails/new.html"
+    if Helpers.logged_in?(session)
+      erb :"/trails/new.html"
+    else
+      redirect "/"
+    end
+    
   end
 
   # POST: /trails
   post "/trails" do
+    @trail = Trail.new(params[:trail])
+    if !params[:region][:name].empty?
+      @trail.region = Region.find_or_initialize_by(params[:region])
+      @trail.save
+    end
+    binding.pry
     redirect "/trails"
   end
 

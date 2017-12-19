@@ -1,6 +1,5 @@
 class HikersController < ApplicationController
 
-  # GET: /hikers
   get "/hikers" do
     if Helpers.logged_in?(session)
       @hikers = Hiker.all
@@ -10,7 +9,6 @@ class HikersController < ApplicationController
     end
   end
 
-  # GET: /hikers/new
   get "/hikers/new" do
     if Helpers.logged_in?(session)
       erb :"/hikers/new.html"
@@ -19,7 +17,6 @@ class HikersController < ApplicationController
     end
   end
 
-  # POST: /hikers
   post "/hikers" do
     @hiker = Hiker.new(:username => params[:username], password => params[:password])
     if params[:username].empty? || params[:password].empty?
@@ -31,7 +28,6 @@ class HikersController < ApplicationController
     end
   end
 
-  # GET: /hikers/username
   get "/hikers/:slug" do
     if Helpers.logged_in?(session)
       @hiker = Hiker.find_by_slug(params[:slug])
