@@ -38,9 +38,17 @@ class HikersController < ApplicationController
     end
   end
 
-  delete "/hikers/:slug/delete" do
+  delete "/hikers/:slug" do
     @hiker = Hiker.find_by_slug(params[:slug])
-    @hiker.destroy
-    redirect "/"
+    binding.pry
+    if Helpers.logged_in?(session) && Helpers.current_user(session) == @hiker
+      @hiker.destroy
+      session.clear
+      redirect "/"
+    elsif Helpers.logged_in?(session) && Helpers.current_user(session) != @hiker
+      redirect "/hikers/#{@hiker.slug}"
+    else
+      redirect '/'
+    end
   end
 end

@@ -1,8 +1,8 @@
 <h1>All Regions</h1>
-
+<hr>
+<br>
 <% @regions.each do |region| %>
   <ul>
-    <li><%= region.name %></li>
-    <br>
+    <li><a href="/regions/<%= region.slug %>"><%= region.name %></a></li>
   </ul>
 <% end %>

@@ -1,5 +1,4 @@
-<h1><%= @hiker.username %>'s Hiking Profile</h1>
-<hr>
+<h2><%= @hiker.username %>'s Hiking Profile</h2>
 <h3><%= @hiker.trails.size %> Trail(s) Hiked</h3>
 <br>
 
@@ -14,7 +13,8 @@
     <input type="submit" value="Add Trail">
   </form>
   <br>
-  <form action="/trails/<%= @hiker.slug %>">
+  <form method="post" action="/hikers/<%= @hiker.slug %>">
+    <input type="hidden" id="hidden" name="_method" value="delete">
     <input type="submit" value="Delete Account">
   </form>
 </div>

@@ -1,5 +1,8 @@
 <h1><%= @region.name %></h1>
-
+<hr>
+<br>
 <% @region.trails.each do |trail| %>
-  <%= trail.name %>
+  <ul>
+    <li><a href="/trails/<%= trail.slug %>"><%= trail.name %></a></li>
+  </ul>
 <% end %>

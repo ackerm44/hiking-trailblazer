@@ -23,24 +23,24 @@ class RegionsController < ApplicationController
     end
   end
 
-  get "/regions/:slug/edit" do
-    if Helpers.logged_in?(session)
-      @region = Region.find_by_slug(params[:slug])
-      erb :"/regions/edit.html"
-    else
-      redirect "/"
-    end
-  end
+  # get "/regions/:slug/edit" do
+  #   if Helpers.logged_in?(session)
+  #     @region = Region.find_by_slug(params[:slug])
+  #     erb :"/regions/edit.html"
+  #   else
+  #     redirect "/"
+  #   end
+  # end
 
-  patch '/regions/:slug' do
-    @region = Region.find_by_slug(params[:slug])
-    if @region.name.empty?
-      redirect "/regions/#{@region.slug}/edit"
-    else
-      @region.update(params[:region])
-      redirect "/regions/#{@region.slug}"
-    end
-  end
+  # patch '/regions/:slug' do
+  #   @region = Region.find_by_slug(params[:slug])
+  #   if @region.name.empty?
+  #     redirect "/regions/#{@region.slug}/edit"
+  #   else
+  #     @region.update(params[:region])
+  #     redirect "/regions/#{@region.slug}"
+  #   end
+  # end
 
   # delete "/regions/:slug/delete" do
   #   #Add validation that the original user can be the only one to delete
