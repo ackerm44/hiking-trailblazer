@@ -13,9 +13,9 @@
 
   /* --- Welcome Page Styles --- */
   body {
-    background-color: gray;
+    background-color: #7AA138;
     color: #333;
-    font-family: Sans-Serif;
+    font-family: Palatino, Serif;
     line-height: 18px;
   }
 
@@ -29,9 +29,15 @@
     padding: 2.25%; /* 18px / 800px */
     width: 85%;
   }
+  
+  .flex-container {
+    display: flex;
+    flex-direction: row;
+  }
+  
 
   h1 {
-    font-size: 36px;
+    font-size: 40px;
     line-height: 54px;
   }
 
@@ -81,6 +87,20 @@
     margin-top: 20px;
     padding-top: 20px;
   }
+  
+  input[type=submit] {
+    background-color: #1D4B51;
+    border: none;
+    color: white;
+    padding: 10px 27px;
+    text-decoration: none;
+    margin: 3px 2px;
+    cursor: pointer;
+  }
+  
+  
+  
+  
 }
 
 @media screen and (max-width: 600px) {
