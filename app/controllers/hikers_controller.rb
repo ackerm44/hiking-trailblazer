@@ -30,9 +30,11 @@ class HikersController < ApplicationController
   end
 
   get "/hikers/:slug" do
-    if Helpers.logged_in?(session)
-      @hiker = Hiker.find_by_slug(params[:slug])
+    @hiker = Hiker.find_by_slug(params[:slug])
+    if Helpers.logged_in?(session) && Helpers.current_user(session) != @hiker
       erb :"/hikers/show.html"
+    elsif Helpers.logged_in?(session) && Helpers.current_user(session) == @hiker
+      erb :"/sessions/profile.html"
     else
       redirect "/"
     end

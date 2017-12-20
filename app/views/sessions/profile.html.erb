@@ -8,6 +8,15 @@
   </ul>
 <% end %>
 <br><br>
-
+<div class="flex-container">
+  <form action="/trails/new">
+    <input type="submit" value="Add Trail">
+  </form>
+  <br>
+  <form method="post" action="/hikers/<%= @hiker.slug %>">
+    <input type="hidden" id="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Account">
+  </form>
+</div>
 
 <!--Wish List: Have a user be able to add a list of hikes they would like to go on-->
