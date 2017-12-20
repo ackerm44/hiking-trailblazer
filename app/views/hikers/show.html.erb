@@ -1,19 +1,22 @@
-<h2><%= @hiker.username %>'s Hiking Profile</h2>
-
-<h4><%= @hiker.trails.size %> Trail(s) Hiked</h4>
+<h1><%= @hiker.username %>'s Hiking Profile</h1>
+<hr>
+<h3><%= @hiker.trails.size %> Trail(s) Hiked</h3>
 <br>
+
 <% @hiker.trails.each do |trail| %>
   <ul>
-    <li>- <%= trail.name %></li>
+    <li><%= trail.name %></li>
   </ul>
 <% end %>
 <br><br>
-<form action="/trails/new">
-  <input type="submit" value="Add Trail">
-</form>
-<br>
-<form action="/trails/<%= @hiker.slug %>">
-  <input type="submit" value="Delete Account">
-</form>
+<div class="flex-container">
+  <form action="/trails/new">
+    <input type="submit" value="Add Trail">
+  </form>
+  <br>
+  <form action="/trails/<%= @hiker.slug %>">
+    <input type="submit" value="Delete Account">
+  </form>
+</div>
 
 <!--Wish List: Have a user be able to add a list of hikes they would like to go on-->

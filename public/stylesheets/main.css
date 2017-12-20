@@ -1,7 +1,6 @@
 @media screen {
   /* --- Reset Styles --- */
   * {
-    list-style: none;
     margin: 0;
     padding: 0;
   }
@@ -98,8 +97,48 @@
     cursor: pointer;
   }
   
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #355301;
+  }
+
+  nav li {
+    float: left;
+  }
+
+  nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  nav li a:hover {
+    background-color: #567B16;
+  }
   
+  ul {
+    font-size: 20px;
+    line-height: 30px;
+    margin-left: 20px;
+    list-style-type: square;
+  }
   
+  .all_hikers li a {
+    font-size: 20px;
+    color: #022226;
+    text-decoration: none;
+  }
+  
+  .all_hikers li a:hover {
+    
+    color: #2F5D64;
+    text-decoration: none;
+  }
   
 }
 
