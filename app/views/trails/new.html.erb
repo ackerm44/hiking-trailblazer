@@ -4,7 +4,7 @@
   <h4>Select from Existing Trails:</h4>
   <br>
   <% Trail.all.each do |trail| %>
-    <input type="checkbox" name="trail_ids[]" value="<%= trail.id %>"> <%= trail.name %></input>
+    <input type="checkbox" name="trail_id" value="<%= trail.id %>"> <%= trail.name %></input>
   <% end %>
   <br><br>
   <h4>Add a New Trail:</h4>

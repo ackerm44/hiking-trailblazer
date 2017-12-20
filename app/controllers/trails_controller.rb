@@ -20,11 +20,18 @@ class TrailsController < ApplicationController
 
   # POST: /trails
   
-  #Validation that only one region is selected and a user didn't create new as well
   post "/trails" do
-    @trail = Trail.new(params[:trail])
-    if !params[:region][:name].empty?
-      @trail.region = Region.find_or_initialize_by(params[:region])
+    binding.pry
+    if !params[:trail_id].nil?
+      @trail = Trail.find_by_id(params[:trail_id])
+    else
+      @trail = Trail.new(params[:trail])
+      if Trail.exists?(name: params[:trail][:name])
+        redirect '/trails/new'
+      end
+      if !params[:region][:name].empty?
+        @trail.region = Region.find_or_initialize_by(params[:region])
+      end
     end
     @trail.hikers << Helpers.current_user(session)
     @trail.save
