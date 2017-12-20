@@ -1,9 +1,9 @@
 <h1>Edit Region Name</h1>
 
-<form method="post" action="/regions/<%= @region.slug %>">
-  <input type="hidden" id="hidden" name="_method" name="patch">
+<form method="POST" action="/regions/<%= @region.slug %>">
+  <input type="hidden" id="hidden" name="_method" value="patch">
   <label for="name">Region Name: </label>
   <input type="text" id="name" name="region[name]" value="<%= @region.name %>">
   <br><br>
-  <input type="submit" value="Edit Region">
+  <input type="submit" value="Save Region">
 </form>

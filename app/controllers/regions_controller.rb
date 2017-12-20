@@ -1,6 +1,10 @@
 class RegionsController < ApplicationController
+  ## A region can only be added when a trail is added
+  ## All regions can be viewed, a single region can be viewed
+  ## A region can be edited (name)
+  ## A region cannot be deleted
 
-  # GET: /regions
+
   get "/regions" do
     if Helpers.logged_in?(session)
       @regions = Region.all
@@ -10,25 +14,41 @@ class RegionsController < ApplicationController
     end
   end
 
-  # GET: /regions/nw-michigan
   get "/regions/:slug" do
-    @region = Region.find_by_slug(params[:slug])
-    erb :"/regions/show.html"
+    if Helpers.logged_in?(session)
+      @region = Region.find_by_slug(params[:slug])
+      erb :"/regions/show.html"
+    else
+      redirect "/"
+    end
   end
 
-  # GET: /regions/nwmichigan/edit
   get "/regions/:slug/edit" do
+    if Helpers.logged_in?(session)
+      @region = Region.find_by_slug(params[:slug])
+      erb :"/regions/edit.html"
+    else
+      redirect "/"
+    end
+  end
+
+  patch '/regions/:slug' do
     @region = Region.find_by_slug(params[:slug])
-    erb :"/regions/edit.html"
+    if @region.name.empty?
+      redirect "/regions/#{@region.slug}/edit"
+    else
+      @region.update(params[:region])
+      redirect "/regions/#{@region.slug}"
+    end
   end
 
-  # PATCH: /regions/5
-  patch "/regions/:id" do
-    redirect "/regions/:id"
-  end
-
-  # DELETE: /regions/5/delete
-  delete "/regions/:id/delete" do
-    redirect "/regions"
-  end
+  # delete "/regions/:slug/delete" do
+  #   #Add validation that the original user can be the only one to delete
+  #   if Helpers.logged_in?(session)
+  #     @region = Region.find_by_slug(params[:slug])
+  #     redirect "/regions"
+  #   else
+  #     redirect "/"
+  #   end
+  # end
 end

@@ -15,13 +15,9 @@ class TrailsController < ApplicationController
     else
       redirect "/"
     end
-    
   end
 
-  # POST: /trails
-  
   post "/trails" do
-    binding.pry
     if !params[:trail_id].nil?
       @trail = Trail.find_by_id(params[:trail_id])
     else
@@ -38,7 +34,6 @@ class TrailsController < ApplicationController
     redirect "/trails"
   end
 
-  # GET: /trails/5
   get "/trails/:slug" do
     if Helpers.logged_in?(session)
       @trail = Trail.find_by_slug(params[:slug])
@@ -46,10 +41,8 @@ class TrailsController < ApplicationController
     else
       redirect "/"
     end
-    
   end
 
-  # GET: /trails/days-river-trail/edit
   get "/trails/:slug/edit" do
     if Helpers.logged_in?(session)
       @trail = Trail.find_by_slug(params[:slug])
@@ -59,14 +52,13 @@ class TrailsController < ApplicationController
     end
   end
 
-  patch "/trails/:slug" do
+  patch '/trails/:slug' do
     @trail = Trail.find_by_slug(params[:slug])
     @trail.update(params[:trail])
-    binding.pry
+    #binding.pry
     redirect "/trails/#{@trail.slug}"
   end
 
-  # DELETE: /trails/days-river-trail/delete
   delete "/trails/:slug" do
     if Helpers.logged_in?(session)
       @trail = Trail.find_by_slug(params[:slug])
