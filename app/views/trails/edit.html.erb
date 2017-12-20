@@ -1,1 +1,30 @@
-<h1>Insert the form to edit an instance of your model here.</h1>
+<h1>Edit a Trail</h1>
+
+<form method="POST" action="/trails/<%= @trail.slug %>">
+  <input type="hidden" id="hidden" name="_method" value="patch">
+
+  <h4>Edit Trail:</h4>
+  <br>
+  <label for="name">Trail Name: </label>
+  <input type="text" id="name" name="trail[name]" value="<%= @trail.name %>">
+  <br><br>
+  <label for="length">Trail Length: </label>
+  <input type="text" id="length" name="trail[length]" value="<%= @trail.length %>">
+  <br><br>
+  <textarea id="highlights" name="trail[highlights]" rows="10" columns="30" ><%= @trail.highlights %></textarea>
+  <br><br>
+  <fieldset>
+    <legend>Change Region</legend>
+    <br>
+    <% Region.all.each do |region| %>
+      <input type="radio" name="trail[region_id]" value="<%= region.id %>" <%='checked' if @trail.region == region %>> <%= region.name %> </input>
+    <% end %>
+    <br><br>
+    <label>Or Add New Region: </label>
+    <input type="text" name="region[name]" >
+    <br><br>
+  </fieldset>
+  <br>
+  <input type="submit" value="Edit Trail">
+
+</form>

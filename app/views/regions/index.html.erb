@@ -1,1 +1,8 @@
-<h1>This is the Model's index page.</h1>
+<h1>All Regions</h1>
+
+<% @regions.each do |region| %>
+  <ul>
+    <li><%= region.name %></li>
+    <br>
+  </ul>
+<% end %>

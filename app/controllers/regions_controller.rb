@@ -2,26 +2,23 @@ class RegionsController < ApplicationController
 
   # GET: /regions
   get "/regions" do
-    erb :"/regions/index.html"
+    if Helpers.logged_in?(session)
+      @regions = Region.all
+      erb :"/regions/index.html"
+    else
+      redirect "/"
+    end
   end
 
-  # GET: /regions/new
-  get "/regions/new" do
-    erb :"/regions/new.html"
-  end
-
-  # POST: /regions
-  post "/regions" do
-    redirect "/regions"
-  end
-
-  # GET: /regions/5
-  get "/regions/:id" do
+  # GET: /regions/nw-michigan
+  get "/regions/:slug" do
+    @region = Region.find_by_slug(params[:slug])
     erb :"/regions/show.html"
   end
 
-  # GET: /regions/5/edit
-  get "/regions/:id/edit" do
+  # GET: /regions/nwmichigan/edit
+  get "/regions/:slug/edit" do
+    @region = Region.find_by_slug(params[:slug])
     erb :"/regions/edit.html"
   end
 

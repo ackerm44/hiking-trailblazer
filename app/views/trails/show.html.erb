@@ -1,1 +1,15 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h2><%= @trail.name %></h2>
+
+<h4>Trail Length: <%= @trail.length %> miles</h4>
+<br>
+<p><%= @trail.highlights %></p>
+
+<form action="/trails/<%= @trail.slug %>/edit">
+  <input type="submit" value="Edit Trail">
+</form>
+<form method="POST" action="/trails/<%= @trail.slug %>">
+  <input type="hidden" id="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Trail">
+</form>
+
+

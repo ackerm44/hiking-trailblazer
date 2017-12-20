@@ -1,1 +1,9 @@
-<h1>Insert the form to edit an instance of your model here.</h1>
+<h1>Edit Region Name</h1>
+
+<form method="post" action="/regions/<%= @region.slug %>">
+  <input type="hidden" id="hidden" name="_method" name="patch">
+  <label for="name">Region Name: </label>
+  <input type="text" id="name" name="region[name]" value="<%= @region.name %>">
+  <br><br>
+  <input type="submit" value="Edit Region">
+</form>

@@ -34,22 +34,41 @@ class TrailsController < ApplicationController
   end
 
   # GET: /trails/5
-  get "/trails/:id" do
-    erb :"/trails/show.html"
+  get "/trails/:slug" do
+    if Helpers.logged_in?(session)
+      @trail = Trail.find_by_slug(params[:slug])
+      erb :"/trails/show.html"
+    else
+      redirect "/"
+    end
+    
   end
 
-  # GET: /trails/5/edit
-  get "/trails/:id/edit" do
-    erb :"/trails/edit.html"
+  # GET: /trails/days-river-trail/edit
+  get "/trails/:slug/edit" do
+    if Helpers.logged_in?(session)
+      @trail = Trail.find_by_slug(params[:slug])
+      erb :"/trails/edit.html"
+    else
+      redirect "/"
+    end
   end
 
-  # PATCH: /trails/5
-  patch "/trails/:id" do
-    redirect "/trails/:id"
+  patch "/trails/:slug" do
+    @trail = Trail.find_by_slug(params[:slug])
+    @trail.update(params[:trail])
+    binding.pry
+    redirect "/trails/#{@trail.slug}"
   end
 
-  # DELETE: /trails/5/delete
-  delete "/trails/:id/delete" do
-    redirect "/trails"
+  # DELETE: /trails/days-river-trail/delete
+  delete "/trails/:slug" do
+    if Helpers.logged_in?(session)
+      @trail = Trail.find_by_slug(params[:slug])
+      @trail.destroy
+      redirect '/login'
+    else
+      redirect "/"
+    end
   end
 end
