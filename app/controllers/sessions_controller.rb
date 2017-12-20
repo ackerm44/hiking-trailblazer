@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
   get '/login' do
     if Helpers.logged_in?(session)
-      redirect "/hikers/#{@hiker.slug}"
+      redirect "/hikers/#{Helpers.current_user(session).slug}"
     else
       erb :"/sessions/login.html"
     end
@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     @hiker = Hiker.find_by(:username => params[:username])
     if @hiker && @hiker.authenticate(params[:password])
       session[:id] = @hiker.id
-      #binding.pry
+      binding.pry
       redirect "/hikers/#{@hiker.slug}"
     else
       redirect "/login"

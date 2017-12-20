@@ -4,13 +4,15 @@
 <br>
 <p><%= @trail.highlights %></p>
 
-<form action="/trails/<%= @trail.slug %>/edit">
-  <input type="submit" value="Edit Trail">
-</form>
-<form method="post" action="/trails/<%= @trail.slug %>">
-  <input type="hidden" id="hidden" name="_method" value="delete">
-  <input type="submit" value="Delete Trail">
-</form>
+<div class="flex-container">
+  <form action="/trails/<%= @trail.slug %>/edit">
+    <input type="submit" value="Edit Trail">
+  </form>
+  <form method="post" action="/trails/<%= @trail.slug %>">
+    <input type="hidden" id="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Trail">
+  </form>
+</div>
 
 
 

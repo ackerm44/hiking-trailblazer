@@ -5,7 +5,7 @@
 
 <% @hiker.trails.each do |trail| %>
   <ul>
-    <li><%= trail.name %></li>
+    <li><a href="/trails/<%= trail.slug %>"><%= trail.name %></a></li>
   </ul>
 <% end %>
 <br><br>

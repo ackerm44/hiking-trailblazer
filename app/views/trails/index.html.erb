@@ -1,7 +1,10 @@
-<h2>All Trails Trekked</h2>
-
-<% @trails.each do |trail| %>
-  <%= trail.name %>
-  <%= trail.length %>
+<h1>All Trails Trekked</h1>
+<hr>
+<br>
+<div>
+  <% @trails.each do |trail| %>
+  <ul>
+    <li><a href="/trails/<%= trail.slug %>"><%= trail.name %> | <%= trail.length %> miles</a></li>
+  </ul>
 <% end %>
-  
+</div>
