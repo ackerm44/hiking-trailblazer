@@ -18,10 +18,9 @@ class HikersController < ApplicationController
   end
 
   post "/hikers" do
-    #refactor
-    
-    @hiker = Hiker.new(:username => params[:username], password => params[:password])
-    if params[:username].empty? || params[:password].empty?
+    #refactor and consider adding flash message for the error
+    @hiker = Hiker.new(:username => params[:username], :password => params[:password])
+    if params[:username].empty? || params[:password].empty? || Hiker.exists?(username: params[:username])
       redirect "/hikers/new"
     else
       @hiker.save

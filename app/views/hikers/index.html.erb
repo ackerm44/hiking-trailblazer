@@ -1,5 +1,8 @@
 <h2>All Hikers on Hiking Trailblazer</h2>
 
 <% @hikers.each do |hiker| %>
-  <a href="/hikers/<%= hiker.slug %>"><%= hiker.username %></a>
+  <ul>
+    <li><a href="/hikers/<%= hiker.slug %>"><%= hiker.username %></a></li>
+    <br>
+  </ul>
 <% end %>
