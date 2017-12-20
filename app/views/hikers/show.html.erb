@@ -4,11 +4,16 @@
 <br>
 <% @hiker.trails.each do |trail| %>
   <ul>
-    <li><%= trail.name %></li>
+    <li>- <%= trail.name %></li>
   </ul>
 <% end %>
-
-<!--Show a list of the trails the hiker has completed-->
-<!--Show a count of all the trails completed-->
+<br><br>
+<form action="/trails/new">
+  <input type="submit" value="Add Trail">
+</form>
+<br>
+<form action="/trails/<%= @hiker.slug %>">
+  <input type="submit" value="Delete Account">
+</form>
 
 <!--Wish List: Have a user be able to add a list of hikes they would like to go on-->

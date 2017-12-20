@@ -38,18 +38,22 @@ class HikersController < ApplicationController
     end
   end
 
-  # # GET: /hikers/5/edit
-  # get "/hikers/:id/edit" do
-  #   erb :"/hikers/edit.html"
-  # end
+  get "/hikers/:slug/edit" do
+    if Helpers.logged_in?(session)
+      @hiker = Hiker.find_by_slug(params[:slug])
+      erb :"/hikers/edit.html"
+    else
+      redirect "/"
+    end
+  end
 
-  # # PATCH: /hikers/5
-  # patch "/hikers/:id" do
-  #   redirect "/hikers/:id"
-  # end
+  # PATCH: /hikers/5
+  patch "/hikers/:id" do
+    redirect "/hikers/:id"
+  end
 
-  # # DELETE: /hikers/5/delete
-  # delete "/hikers/:id/delete" do
-  #   redirect "/hikers"
-  # end
+  # DELETE: /hikers/5/delete
+  delete "/hikers/:id/delete" do
+    redirect "/hikers"
+  end
 end

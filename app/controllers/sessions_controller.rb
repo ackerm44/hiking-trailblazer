@@ -12,8 +12,7 @@ class SessionsController < ApplicationController
     @hiker = Hiker.find_by(:username => params[:username])
     if @hiker && @hiker.authenticate(params[:password])
       session[:id] = @hiker.id
-      binding.pry
-      redirect '/trails'
+      redirect "/hikers/#{@hiker.slug}"
     else
       redirect "/login"
     end
