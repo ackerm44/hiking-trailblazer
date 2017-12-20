@@ -12,16 +12,17 @@ class SessionsController < ApplicationController
     @hiker = Hiker.find_by(:username => params[:username])
     if @hiker && @hiker.authenticate(params[:password])
       session[:id] = @hiker.id
+      binding.pry
       redirect '/trails'
     else
-      redirect "/hikers/#{@hiker.slug}"
+      redirect "/login"
     end
   end
   
   get '/logout' do
     #When logged out, show happy trails message and redirect to login
     if Helpers.logged_in?(session)
-      session.clear
+      @session.clear
       redirect "/login"
     else
       redirect "/"

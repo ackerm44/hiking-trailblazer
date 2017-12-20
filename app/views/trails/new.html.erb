@@ -21,7 +21,7 @@
     <legend>Select Region or Create New</legend>
     <br>
     <% Region.all.each do |region| %>
-      <input type="radio" name="region_ids[]" value="<%= region.id %>"> <%= region.name %></input>
+      <input type="radio" name="trail[region_id]" value="<%= region.id %>"> <%= region.name %></input>
     <% end %>
     <br><br>
     <label>New Region: </label>
@@ -32,3 +32,4 @@
   <input type="submit" value="Add New Trail">
 
 </form>
+
