@@ -11,13 +11,15 @@ class HikersController < ApplicationController
 
   get "/hikers/new" do
     if Helpers.logged_in?(session)
-      erb :"/hikers/new.html"
+      redirect "/trails"
     else
-      redirect "/"
+      erb :"/hikers/new.html"
     end
   end
 
   post "/hikers" do
+    #refactor
+    
     @hiker = Hiker.new(:username => params[:username], password => params[:password])
     if params[:username].empty? || params[:password].empty?
       redirect "/hikers/new"

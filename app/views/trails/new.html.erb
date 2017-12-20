@@ -24,8 +24,9 @@
       <input type="radio" name="trail[region_id]" value="<%= region.id %>"> <%= region.name %></input>
     <% end %>
     <br><br>
-    <label>New Region: </label>
-    <input type="text" name="region[name]" >
+    <input type="radio"> Or Add a </input>
+    <label for="region_name">New Region: </label>
+    <input type="text" id="region_name" name="region[name]" >
     <br><br>
   </fieldset>
   <br>

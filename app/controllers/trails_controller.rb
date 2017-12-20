@@ -1,6 +1,5 @@
 class TrailsController < ApplicationController
 
-  # GET: /trails
   get "/trails" do
     if Helpers.logged_in?(session)
       @trails = Trail.all
@@ -10,7 +9,6 @@ class TrailsController < ApplicationController
     end
   end
 
-  # GET: /trails/new
   get "/trails/new" do
     if Helpers.logged_in?(session)
       erb :"/trails/new.html"
@@ -22,7 +20,7 @@ class TrailsController < ApplicationController
 
   # POST: /trails
   
-  #Validation that only one region is selected
+  #Validation that only one region is selected and a user didn't create new as well
   post "/trails" do
     @trail = Trail.new(params[:trail])
     if !params[:region][:name].empty?
