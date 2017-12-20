@@ -44,9 +44,13 @@ class TrailsController < ApplicationController
   end
 
   get "/trails/:slug/edit" do
-    if Helpers.logged_in?(session)
-      @trail = Trail.find_by_slug(params[:slug])
+    @trail = Trail.find_by_slug(params[:slug])
+    if Helpers.logged_in?(session) && Helpers.current_user(session) == @trail.hikers[0]
+      #binding.pry
       erb :"/trails/edit.html"
+    elsif Helpers.logged_in?(session) && Helpers.current_user(session) != @trail.hikers[0]
+      #Add a flash message about error
+      redirect "/trails/#{@trail.slug}"
     else
       redirect "/"
     end
@@ -60,10 +64,12 @@ class TrailsController < ApplicationController
   end
 
   delete "/trails/:slug" do
-    if Helpers.logged_in?(session)
-      @trail = Trail.find_by_slug(params[:slug])
+    @trail = Trail.find_by_slug(params[:slug])
+    if Helpers.logged_in?(session) && Helpers.current_user(session) == @trail.hikers[0]
       @trail.destroy
-      redirect '/login'
+      redirect '/trails'
+    elsif Helpers.logged_in?(session) && Helpers.current_user(session) != @trail.hikers[0]
+      redirect "/trails/#{@trail.slug}"
     else
       redirect "/"
     end
