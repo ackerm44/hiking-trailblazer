@@ -11,9 +11,9 @@ class HikersController < ApplicationController
 
   get "/hikers/new" do
     if Helpers.logged_in?(session)
-      redirect "/trails"
+      redirect "/hikers"
     else
-      erb :"/hikers/new.html"
+      erb :"/hikers/new.html", :layout => :layout_loggedout
     end
   end
 
@@ -25,7 +25,7 @@ class HikersController < ApplicationController
     else
       @hiker.save
       session[:id] = @hiker.id
-      redirect "/hikers"
+      redirect "/hikers/#{@hiker.slug}"
     end
   end
 

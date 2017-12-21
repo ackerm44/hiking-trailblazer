@@ -1,19 +1,23 @@
-<h2>Add a Trail to your Profile</h2>
-
+<h1>Add a Trail to your Profile</h1>
+<br><br>
 <form method="POST" action="/trails">
-  <h4>Select from Existing Trails:</h4>
-  <br>
-  <% Trail.all.each do |trail| %>
-    <input type="checkbox" name="trail_id" value="<%= trail.id %>"> <%= trail.name %></input>
-  <% end %>
+  <div class="existingTrails">
+    <h2>Select from Existing Trails:</h2>
+    <br>
+    <% Trail.all.each do |trail| %>
+      <input type="checkbox" name="trail_id" value="<%= trail.id %>"> <%= trail.name %></input>
+    <% end %>
   <br><br>
-  <h4>Add a New Trail:</h4>
+  </div>
+  <br><br>
+  <h2>Or Add a New Trail:</h2>
   <br>
   <label for="name">Trail Name: </label>
   <input type="text" id="name" name="trail[name]">
   <br><br>
   <label for="length">Trail Length: </label>
-  <input type="text" id="length" name="trail[length]" placeholder="13.5">
+  <input type="text" id="length" name="trail[length]" placeholder="13.5"> 
+  <em>miles</em>
   <br><br>
   <textarea id="highlights" name="trail[highlights]" rows="10" columns="30" placeholder="Trail Highlights"></textarea>
   <br><br>
@@ -31,6 +35,8 @@
   </fieldset>
   <br>
   <input type="submit" value="Add New Trail">
-
+</form>
+<form action="/trails">
+  <input type="submit" value="Cancel">
 </form>
 

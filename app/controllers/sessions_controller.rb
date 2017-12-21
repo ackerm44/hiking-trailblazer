@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     if Helpers.logged_in?(session)
       redirect "/hikers/#{Helpers.current_user(session).slug}"
     else
-      erb :"/sessions/login.html"
+      erb :"/sessions/login.html", :layout => :layout_loggedout
     end
   end
   
