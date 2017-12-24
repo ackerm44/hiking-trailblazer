@@ -11,6 +11,7 @@ class RegionsController < ApplicationController
       erb :"/regions/index.html"
     else
       redirect "/"
+      flash[:sign_in_message] = "Please log-in"
     end
   end
 
@@ -20,6 +21,7 @@ class RegionsController < ApplicationController
       erb :"/regions/show.html"
     else
       redirect "/"
+      flash[:sign_in_message] = "Please log-in"
     end
   end
 

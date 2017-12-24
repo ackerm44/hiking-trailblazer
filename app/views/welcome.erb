@@ -10,3 +10,5 @@
     <input type="Submit" value="Log-in">
   </form>
 </div>
+<br>
+<% if !!flash[:sign_in_message] %><em><h3><%= flash[:sign_in_message] %></h3></em> <% end %>

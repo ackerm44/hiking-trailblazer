@@ -38,5 +38,6 @@
 </form>
 <form action="/trails">
   <input type="submit" value="Cancel">
+  <% if !!flash[:trail_error] %><em><h3><%= flash[:trail_error] %></h3></em> <% end %>
 </form>
 

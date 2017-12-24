@@ -5,7 +5,9 @@ class HikersController < ApplicationController
       @hikers = Hiker.all
       erb :"/hikers/index.html"
     else
+      flash[:sign_in_message] = "Please log-in"
       redirect "/"
+      
     end
   end
 
@@ -18,9 +20,12 @@ class HikersController < ApplicationController
   end
 
   post "/hikers" do
-    #refactor and consider adding flash message for the error
     @hiker = Hiker.new(:username => params[:username], :password => params[:password])
-    if params[:username].empty? || params[:password].empty? || Hiker.exists?(username: params[:username])
+    if params[:username].empty? || params[:password].empty?
+      flash[:hiker_error] = "Username and password fields must be filled out"
+      redirect "/hikers/new"
+    elsif Hiker.exists?(username: params[:username])
+      flash[:hiker_error] = "Username already in use"
       redirect "/hikers/new"
     else
       @hiker.save
@@ -37,6 +42,7 @@ class HikersController < ApplicationController
       erb :"/sessions/profile.html"
     else
       redirect "/"
+      flash[:sign_in_message] = "Please log-in"
     end
   end
 
@@ -51,6 +57,7 @@ class HikersController < ApplicationController
       redirect "/hikers/#{@hiker.slug}"
     else
       redirect '/'
+      flash[:sign_in_message] = "Please log-in"
     end
   end
 end

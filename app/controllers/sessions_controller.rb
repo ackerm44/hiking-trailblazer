@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
       session[:id] = @hiker.id
       redirect "/hikers/#{@hiker.slug}"
     else
+      flash[:log_in_error] = "Username or Password Incorrect"
       redirect "/login"
     end
   end
@@ -25,6 +26,7 @@ class SessionsController < ApplicationController
       redirect "/login"
     else
       redirect "/"
+      flash[:sign_in_message] = "Please log-in"
     end
   end
 end

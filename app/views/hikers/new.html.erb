@@ -9,5 +9,5 @@
   <br><br>
   <input type="submit" value="Create Account">
   
-<!--Consider putting in re-enter password to validate that password is typed correctly-->
+  <% if !!flash[:hiker_error] %><em><h3><%= flash[:hiker_error] %></h3></em> <% end %>
 </form>

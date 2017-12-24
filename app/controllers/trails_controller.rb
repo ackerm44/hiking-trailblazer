@@ -6,6 +6,7 @@ class TrailsController < ApplicationController
       erb :"/trails/index.html"
     else
       redirect "/"
+      flash[:sign_in_message] = "Please log-in"
     end
   end
 
@@ -14,15 +15,22 @@ class TrailsController < ApplicationController
       erb :"/trails/new.html"
     else
       redirect "/"
+      flash[:sign_in_message] = "Please log-in"
     end
   end
 
   post "/trails" do
+    binding.pry
     if !params[:trail_id].nil?
       @trail = Trail.find_by_id(params[:trail_id])
-    else
+    else !params[:trail].empty?
       @trail = Trail.new(params[:trail])
-      if Trail.exists?(name: params[:trail][:name])
+      if Trail.exists?(name: params[:trail][:name]) || params[:trail].empty?
+        flash[:trail_error] = "Trail already exists or above trail must be selected"
+        redirect '/trails/new'
+      end
+      if params[:region][:name].empty? || params[:trail][:region_id].empty?
+        flash[:trail_error] = "Please select or create a region"
         redirect '/trails/new'
       end
       if !params[:region][:name].empty?
@@ -40,6 +48,7 @@ class TrailsController < ApplicationController
       erb :"/trails/show.html"
     else
       redirect "/"
+      flash[:sign_in_message] = "Please log-in"
     end
   end
 
@@ -53,6 +62,7 @@ class TrailsController < ApplicationController
       redirect "/trails/#{@trail.slug}"
     else
       redirect "/"
+      flash[:sign_in_message] = "Please log-in"
     end
   end
 
@@ -72,6 +82,7 @@ class TrailsController < ApplicationController
       redirect "/trails/#{@trail.slug}"
     else
       redirect "/"
+      flash[:sign_in_message] = "Please log-in"
     end
   end
 end

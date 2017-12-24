@@ -8,6 +8,6 @@
   <input type="password" id="password" name="password">
   <br><br>
   <input type="submit" value="Log-In">
-  
-<!--Consider putting in re-enter password to validate that password is typed correctly-->
+  <% if !!flash[:log_in_error] %><em><h3><%= flash[:log_in_error] %></h3></em> <% end %>
 </form>
+

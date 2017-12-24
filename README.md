@@ -20,6 +20,8 @@ See the CODE_OF_CONDUCT.md file, CONTRIBUTING.md file and LICENSE.md file for ad
 
 
 TO-DO 
-1.  Add validation for blank trail info
 2.  Contributing.md
-3.  
+3.  Blog
+4.  Demo
+5.  Flash messages
+6.  Refactor
