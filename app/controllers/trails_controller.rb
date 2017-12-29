@@ -20,16 +20,22 @@ class TrailsController < ApplicationController
   end
 
   post "/trails" do
-    binding.pry
+    #binding.pry
+    @hiker = Helpers.current_user(session)
     if !params[:trail_id].nil?
-      @trail = Trail.find_by_id(params[:trail_id])
+      if @hiker.trails.ids.include?(params[:trail_id].to_i)
+        flash[:trail_error] = "Trail already in profile."
+        redirect '/trails/new'
+      else
+        @trail = Trail.find_by_id(params[:trail_id])
+      end
     else !params[:trail].empty?
       @trail = Trail.new(params[:trail])
-      if Trail.exists?(name: params[:trail][:name]) || params[:trail].empty?
-        flash[:trail_error] = "Trail already exists or above trail must be selected"
+      if Trail.exists?(name: params[:trail][:name])
+        flash[:trail_error] = "Trail already exists.  Select from above trail."
         redirect '/trails/new'
       end
-      if params[:region][:name].empty? || params[:trail][:region_id].empty?
+      if params[:region][:name].empty? && params[:trail][:region_id].empty?
         flash[:trail_error] = "Please select or create a region"
         redirect '/trails/new'
       end
@@ -55,7 +61,6 @@ class TrailsController < ApplicationController
   get "/trails/:slug/edit" do
     @trail = Trail.find_by_slug(params[:slug])
     if Helpers.logged_in?(session) && Helpers.current_user(session) == @trail.hikers[0]
-      #binding.pry
       erb :"/trails/edit.html"
     elsif Helpers.logged_in?(session) && Helpers.current_user(session) != @trail.hikers[0]
       #Add a flash message about error
