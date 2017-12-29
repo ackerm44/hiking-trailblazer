@@ -16,12 +16,3 @@ To use this app
 
 
 See the CODE_OF_CONDUCT.md file, CONTRIBUTING.md file and LICENSE.md file for additional information on these topics. 
-
-
-
-TO-DO 
-2.  Contributing.md
-3.  Blog
-4.  Demo
-5.  Flash messages
-6.  Refactor
