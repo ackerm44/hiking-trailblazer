@@ -20,7 +20,6 @@ class TrailsController < ApplicationController
   end
 
   post "/trails" do
-    #binding.pry
     @hiker = Helpers.current_user(session)
     if !params[:trail_id].nil?
       if @hiker.trails.ids.include?(params[:trail_id].to_i)
@@ -63,7 +62,7 @@ class TrailsController < ApplicationController
     if Helpers.logged_in?(session) && Helpers.current_user(session) == @trail.hikers[0]
       erb :"/trails/edit.html"
     elsif Helpers.logged_in?(session) && Helpers.current_user(session) != @trail.hikers[0]
-      #Add a flash message about error
+      flash[:user_error_message] = "Only the trail creator can edit this trail"
       redirect "/trails/#{@trail.slug}"
     else
       redirect "/"
@@ -74,7 +73,6 @@ class TrailsController < ApplicationController
   patch '/trails/:slug' do
     @trail = Trail.find_by_slug(params[:slug])
     @trail.update(params[:trail])
-    #binding.pry
     redirect "/trails/#{@trail.slug}"
   end
 
@@ -84,6 +82,7 @@ class TrailsController < ApplicationController
       @trail.destroy
       redirect '/trails'
     elsif Helpers.logged_in?(session) && Helpers.current_user(session) != @trail.hikers[0]
+      flash[:user_error_message] = "Only the trail creator can delete this trail"
       redirect "/trails/#{@trail.slug}"
     else
       redirect "/"

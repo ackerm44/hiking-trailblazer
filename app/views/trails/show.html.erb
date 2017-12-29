@@ -13,6 +13,7 @@
     <input type="submit" value="Delete Trail">
   </form>
 </div>
+<% if !!flash[:user_error_message] %><em><h3><%= flash[:user_error_message] %></h3></em> <% end %>
 
 
 

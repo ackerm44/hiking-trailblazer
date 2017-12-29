@@ -20,7 +20,6 @@ class SessionsController < ApplicationController
   end
   
   get '/logout' do
-    #When logged out, show happy trails message and redirect to login
     if Helpers.logged_in?(session)
       session.clear
       redirect "/login"

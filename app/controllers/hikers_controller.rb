@@ -7,7 +7,6 @@ class HikersController < ApplicationController
     else
       flash[:sign_in_message] = "Please log-in"
       redirect "/"
-      
     end
   end
 
