@@ -47,7 +47,6 @@ class HikersController < ApplicationController
 
   delete "/hikers/:slug" do
     @hiker = Hiker.find_by_slug(params[:slug])
-    binding.pry
     if Helpers.logged_in?(session) && Helpers.current_user(session) == @hiker
       @hiker.destroy
       session.clear
